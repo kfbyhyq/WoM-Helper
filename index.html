@@ -3,28 +3,21 @@
     <meta charset="UTF-8">  
     <title>Minesweeper Online Helper</title>  
 </head>  
-<body>  
-    <div id="d1">test</div>
+<body>
     <div id="message-container"></div> 
     <script>  
-        // 假设你的txt文件位于GitHub仓库的某个分支上，并且你有一个Raw URL  
-        // 注意：这里你需要将URL替换为实际的Raw URL  
-        console.log('开始');
         fetch('./display.txt')  
-            .then(response => response.text()) // 注意这里使用.text()而不是.json()，因为我们正在加载文本  
+            .then(response => response.text())
             .then(data => {  
-                console.log('读取成功');
-                // 将加载的数据（即txt文件的内容）显示在页面上  
                 const container = document.getElementById('message-container');  
-                container.textContent = data; // 直接设置textContent来显示文本  
-  
-                // 如果你想要按行显示，可以这样做：  
-                // const lines = data.split('\n'); // 将文本按行分割  
-                // lines.forEach(line => {  
-                //     const p = document.createElement('p');  
-                //     p.textContent = line;  
-                //     container.appendChild(p);  
-                // });  
+                // container.textContent = data; // 直接设置textContent来显示文本  
+    
+                const lines = data.split('\n'); // 将文本按行分割  
+                lines.forEach(line => {  
+                    const p = document.createElement('p');  
+                    p.textContent = line;  
+                    container.appendChild(p);  
+                });  
             })  
             .catch(error => console.error('读取失败:', error));  
     </script>  
