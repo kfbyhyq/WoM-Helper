@@ -1,15 +1,3 @@
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if (request.action === 'eventQuest') {
-        let eqInfo = request.eqInfo;
-        console.log('活动任务信息:', eqInfo);   // 在控制台打出结果
-        chrome.storage.local.set({ eqInfo: eqInfo });     // 保存数据
-        document.getElementById('updateEq').style.backgroundColor = '#4caf50';   // 将对应按钮变为绿色，表示提取成功
-        document.getElementById('flag2').textContent = 1;   // 设置成功标记
-        const output = eqInfo.map(item => item + '<br>').join('');
-        document.getElementById('eqInfo').innerHTML = output;
-    }
-});
-
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('#updateEq').addEventListener('click', function () {
         const button = document.getElementById('updateEq');
@@ -179,4 +167,16 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+});
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.action === 'eventQuest') {
+        let eqInfo = request.eqInfo;
+        console.log('活动任务信息:', eqInfo);   // 在控制台打出结果
+        chrome.storage.local.set({ eqInfo: eqInfo });     // 保存数据
+        document.getElementById('updateEq').style.backgroundColor = '#4caf50';   // 将对应按钮变为绿色，表示提取成功
+        document.getElementById('flag2').textContent = 1;   // 设置成功标记
+        const output = eqInfo.map(item => item + '<br>').join('');
+        document.getElementById('eqInfo').innerHTML = output;
+    }
 });
